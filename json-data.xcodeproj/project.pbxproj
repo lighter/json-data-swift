@@ -13,6 +13,9 @@
 		EC8E106019AA126B0094CC57 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC8E105E19AA126B0094CC57 /* Main.storyboard */; };
 		EC8E106219AA126B0094CC57 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC8E106119AA126B0094CC57 /* Images.xcassets */; };
 		EC8E106E19AA126C0094CC57 /* json_dataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8E106D19AA126C0094CC57 /* json_dataTests.swift */; };
+		EC8E107819AA1B490094CC57 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8E107719AA1B490094CC57 /* Post.swift */; };
+		EC8E107A19AA1B640094CC57 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8E107919AA1B640094CC57 /* PostService.swift */; };
+		EC8E107C19AA21820094CC57 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8E107B19AA21820094CC57 /* Setting.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +39,9 @@
 		EC8E106719AA126C0094CC57 /* json-dataTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "json-dataTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC8E106C19AA126C0094CC57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EC8E106D19AA126C0094CC57 /* json_dataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = json_dataTests.swift; sourceTree = "<group>"; };
+		EC8E107719AA1B490094CC57 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		EC8E107919AA1B640094CC57 /* PostService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
+		EC8E107B19AA21820094CC57 /* Setting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +65,9 @@
 		EC8E104A19AA126B0094CC57 = {
 			isa = PBXGroup;
 			children = (
+				EC8E107B19AA21820094CC57 /* Setting.swift */,
+				EC8E107919AA1B640094CC57 /* PostService.swift */,
+				EC8E107719AA1B490094CC57 /* Post.swift */,
 				EC8E105519AA126B0094CC57 /* json-data */,
 				EC8E106A19AA126C0094CC57 /* json-dataTests */,
 				EC8E105419AA126B0094CC57 /* Products */,
@@ -211,9 +220,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC8E107A19AA1B640094CC57 /* PostService.swift in Sources */,
 				EC8E105D19AA126B0094CC57 /* DetailViewController.swift in Sources */,
+				EC8E107C19AA21820094CC57 /* Setting.swift in Sources */,
 				EC8E105B19AA126B0094CC57 /* MasterViewController.swift in Sources */,
 				EC8E105919AA126B0094CC57 /* AppDelegate.swift in Sources */,
+				EC8E107819AA1B490094CC57 /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,10 @@ import UIKit
 class MasterViewController: UITableViewController {
 
     var detailViewController: DetailViewController? = nil
-    var objects = NSMutableArray()
+    // var objects = NSMutableArray()
+
+    var postsCollection = [Post]()
+    var service:PostService!
 
 
     override func awakeFromNib() {
@@ -33,6 +36,28 @@ class MasterViewController: UITableViewController {
             let controllers = split.viewControllers
             self.detailViewController = controllers[controllers.count-1].topViewController as? DetailViewController
         }
+
+        service = PostService()
+
+        service.getPost {
+            (response) in
+            self.loadPosts(response["accounts"]! as NSArray)
+        }
+    }
+
+    func loadPosts(posts:NSArray) {
+        for post in posts {
+            var post = post["account"]! as NSDictionary
+            var id = (post["id"]! as String).toInt()!
+            var account = post["username"]! as String
+            var email = post["email"]! as String
+            var postObj = Post(id: id, username: account, email:email)
+
+            postsCollection.append(postObj)
+        }
+        dispatch_async(dispatch_get_main_queue()) {
+            self.tableView.reloadData()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,20 +65,20 @@ class MasterViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    func insertNewObject(sender: AnyObject) {
-        objects.insertObject(NSDate.date(), atIndex: 0)
-        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-        self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-    }
+//    func insertNewObject(sender: AnyObject) {
+//        objects.insertObject(NSDate.date(), atIndex: 0)
+//        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+//        self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+//    }
 
     // MARK: - Segues
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
             let indexPath = self.tableView.indexPathForSelectedRow()
-            let object = objects[indexPath.row] as NSDate
+            let post = postsCollection[indexPath.row]
             let controller = (segue.destinationViewController as UINavigationController).topViewController as DetailViewController
-            controller.detailItem = object
+            controller.detailItem = post
             controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem()
             controller.navigationItem.leftItemsSupplementBackButton = true
         }
@@ -66,14 +91,14 @@ class MasterViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return objects.count
+        return postsCollection.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
 
-        let object = objects[indexPath.row] as NSDate
-        cell.textLabel.text = object.description
+        let post = postsCollection[indexPath.row]
+        cell.textLabel.text = post.username
         return cell
     }
 
@@ -84,7 +109,7 @@ class MasterViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            objects.removeObjectAtIndex(indexPath.row)
+            postsCollection.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
